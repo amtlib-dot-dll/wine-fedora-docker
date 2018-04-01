@@ -1,6 +1,6 @@
 FROM fedora:26
 RUN useradd -U -m user; \
-    dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/26/winehq.repo; \
+    curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/26/winehq.repo; \
     dnf install winehq-stable; \
     dnf clean all
 USER user
