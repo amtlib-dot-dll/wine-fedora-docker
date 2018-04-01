@@ -1,7 +1,7 @@
 FROM fedora:26
 RUN useradd -U -m user; \
     curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/26/winehq.repo; \
-    dnf install -y winehq-stable; \
+    dnf install -y winehq-stable mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth; \
     dnf clean all; \
     mkdir -p /opt/wine-stable/share/wine/mono /opt/wine-stable/share/wine/gecko; \
     curl -o /opt/wine-stable/share/wine/mono/wine-mono-4.7.1.msi -LJ https://dl.winehq.org/wine/wine-mono/4.7.1/wine-mono-4.7.1.msi; \
