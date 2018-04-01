@@ -6,7 +6,8 @@ services:
   - docker
 
 before_install:
-  - echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json
+  - >-
+      echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json
   - service docker restart
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build --squash -t amtlib/wine-fedora .
