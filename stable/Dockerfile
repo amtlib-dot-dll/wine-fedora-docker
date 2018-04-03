@@ -2,7 +2,7 @@ FROM fedora:26
 RUN useradd -U -m user; \
     curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/26/winehq.repo; \
     dnf install -y winehq-devel mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW; \
-    dnf remove --noautoremove $(rpm -qa wine*); \
+    dnf remove -y --noautoremove $(rpm -qa wine*); \
     dnf clean all; \
     cd /opt; \
     curl -vLOJ https://dl.winehq.org/wine/wine-mono/4.7.1/wine-mono-4.7.1.msi; \
