@@ -10,7 +10,7 @@ before_install:
       echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json
   - sudo service docker restart
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build --squash -t amtlib/wine-fedora .
+  - docker build --squash -t amtlib/wine-fedora stable
 
 script:
   - docker run --rm amtlib/wine-fedora wine --version
