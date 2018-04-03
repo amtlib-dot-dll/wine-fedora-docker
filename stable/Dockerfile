@@ -9,11 +9,11 @@ RUN useradd -U -m user; \
     curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi; \
     curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi
 RUN (while true; do sleep 300; id; done) & \
-    dnf install -y winehq-stable; \
+    dnf install -y winehq-devel; \
     dnf clean all; \
-    mkdir -p /opt/wine-stable/share/wine/mono /opt/wine-stable/share/wine/gecko; \
-    ln -t /opt/wine-stable/share/wine/mono /opt/wine-mono-4.7.1.msi; \
-    ln -t /opt/wine-stable/share/wine/gecko /opt/wine_gecko-2.47-x86_64.msi; \
-    ln -t /opt/wine-stable/share/wine/gecko /opt/wine_gecko-2.47-x86.msi
+    mkdir -p /opt/wine-devel/share/wine/mono /opt/wine-devel/share/wine/gecko; \
+    ln -t /opt/wine-devel/share/wine/mono /opt/wine-mono-4.7.1.msi; \
+    ln -t /opt/wine-devel/share/wine/gecko /opt/wine_gecko-2.47-x86_64.msi; \
+    ln -t /opt/wine-devel/share/wine/gecko /opt/wine_gecko-2.47-x86.msi
 USER user
 WORKDIR /home/user
