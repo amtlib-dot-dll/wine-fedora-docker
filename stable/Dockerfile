@@ -3,7 +3,7 @@ RUN useradd -U -m user; \
     curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/26/winehq.repo; \
     dnf install -y winehq-devel mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW; \
     dnf clean all; \
-    rpm --nodeps --allmatches -vv -ea wine*
+    rpm --nodeps --allmatches -vv -e $(rpm -qa wine*)
 RUN dnf install -y winehq-stable; \
     dnf clean all; \
     mkdir -p /opt/wine-stable/share/wine/mono /opt/wine-stable/share/wine/gecko; \
