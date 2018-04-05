@@ -1,6 +1,6 @@
-FROM fedora:26
+FROM fedora:27
 RUN useradd -U -m user; \
-    curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/26/winehq.repo; \
+    curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/27/winehq.repo; \
     dnf install -y winehq-devel mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW; \
     dnf clean all; \
     mkdir -p /opt/wine-devel/share/wine/mono /opt/wine-devel/share/wine/gecko; \
@@ -11,3 +11,4 @@ RUN useradd -U -m user; \
     curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi
 USER user
 WORKDIR /home/user
+
