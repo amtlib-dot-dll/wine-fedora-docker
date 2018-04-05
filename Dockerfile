@@ -4,6 +4,7 @@ RUN useradd -U -m user; \
     dnf install -y winehq-devel $(dnf repoquery -q --requires winetricks | grep -v ^wine) mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW; \
     dnf clean all; \
     curl -vLo /usr/local/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks; \
+    chmod +x /usr/local/bin/winetricks; \
     mkdir -p /opt/wine-devel/share/wine/mono /opt/wine-devel/share/wine/gecko; \
     cd /opt/wine-devel/share/wine/mono; \
     curl -vLOJ https://dl.winehq.org/wine/wine-mono/4.7.1/wine-mono-4.7.1.msi; \

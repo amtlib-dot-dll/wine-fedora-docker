@@ -5,6 +5,7 @@ RUN useradd -U -m user; \
     dnf remove -y --noautoremove $(rpm -qa wine*); \
     dnf clean all; \
     curl -vLo /usr/local/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks; \
+    chmod +x /usr/local/bin/winetricks; \
     cd /opt; \
     curl -vLOJ https://dl.winehq.org/wine/wine-mono/4.7.1/wine-mono-4.7.1.msi; \
     curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi; \
