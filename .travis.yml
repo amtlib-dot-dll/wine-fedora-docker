@@ -7,13 +7,13 @@ services:
 
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - for branch in 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 3.1 3.2 3.3 3.4 3.5; do cat Dockerfile.ac | sed "s/@VERSION@/$branch/g" | docker build -t amtlib/wine-fedora:$branch -; done
+  - for branch in 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 3.1 3.2 3.3 3.4 3.5 3.6; do cat Dockerfile.ac | sed "s/@VERSION@/$branch/g" | docker build -t amtlib/wine-fedora:$branch -; done
   - cat Dockerfile.ac | sed "s/winehq-devel-@VERSION@/winehq-devel/g" | docker build -t amtlib/wine-fedora:latest -
   - cat Dockerfile.ac | sed "s/winehq-devel-@VERSION@/winehq-stable/g" | sed "s/wine-devel/wine-stable/g" | docker build -t amtlib/wine-fedora:stable -
 
 script:
-  - for branch in latest stable 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 3.1 3.2 3.3 3.4 3.5; do docker run --rm amtlib/wine-fedora:$branch wine --version; done
+  - for branch in latest stable 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 3.1 3.2 3.3 3.4 3.5 3.6; do docker run --rm amtlib/wine-fedora:$branch wine --version; done
 
 after_success:
-  - for branch in latest stable 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 3.1 3.2 3.3 3.4 3.5; do docker push $DOCKER_USERNAME/wine-fedora:$branch; done
+  - for branch in latest stable 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 3.1 3.2 3.3 3.4 3.5 3.6; do docker push $DOCKER_USERNAME/wine-fedora:$branch; done
 
