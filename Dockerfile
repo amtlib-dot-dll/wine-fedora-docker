@@ -19,8 +19,7 @@ RUN useradd -U -m user; \
     rm xpm; \
     mkdir /opt/winxp; \
     cd /opt/winxp; \
-    7z e /tmp/VirtualXPVHD WINDOWS/system32/*.dll; \
-    7z e /tmp/VirtualXPVHD WINDOWS/Fonts/*.*; \
+    7z e /tmp/VirtualXPVHD $(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite msxml msxml2 msxml3 msxml6 ole32 oleaut32 comctl32; do echo WINDOWS/system32/$dll.dll; done); \
     rm /tmp/VirtualXPVHD
 USER user
 WORKDIR /home/user
