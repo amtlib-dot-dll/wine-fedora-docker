@@ -1,5 +1,5 @@
 FROM fedora:27
-RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite msxml msxml2 msxml3 msxml6 ole32 oleaut32 comctl32; do echo WINDOWS/system32/$dll.dll; done); \
+RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite msxml msxml2 msxml3 msxml6 ole32 oleaut32 olepro32 comctl32 quartz pngfilt setupapi devenum; do echo WINDOWS/system32/$dll.dll; done); \
     useradd -U -m user; \
     curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/27/winehq.repo; \
     dnf install -y winehq-devel $(dnf repoquery -q --requires winetricks | grep -v ^wine) glx-utils mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW p7zip-plugins; \
