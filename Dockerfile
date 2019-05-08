@@ -17,7 +17,7 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
     curl -O https://download.microsoft.com/download/B/9/3/B93CD319-CD5A-41C8-9577-39F68D5E8009/WindowsXPMode_zh-tw.exe; \
     curl -O https://download.microsoft.com/download/7/2/C/72C7BAB7-2F32-4530-878A-292C20E1845A/WindowsXPMode_en-us.exe; \
     for alg in md5 sha1 sha256 sha512; do \
-        $alg WindowsXPMode_??-??.exe; \
+        ${alg}sum WindowsXPMode_??-??.exe 1>&2; \
     done; \
     for lcid in zh-cn zh-tw en-us; do \
         7z e -tcab WindowsXPMode_$lcid.exe sources/xpm; \
