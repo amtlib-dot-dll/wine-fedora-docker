@@ -1,4 +1,4 @@
 FROM fedora:30
-RUN script.sh
+RUN /tmp/script.sh
 USER user
 WORKDIR /home/user
