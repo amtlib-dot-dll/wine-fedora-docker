@@ -8,7 +8,7 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
     chmod +x /usr/local/bin/winetricks; \
     mkdir -p /opt/wine-stable/share/wine/mono /opt/wine-stable/share/wine/gecko; \
     cd /opt/wine-stable/share/wine/mono; \
-    curl -vLOJ https://dl.winehq.org/wine/wine-mono/4.8.3/wine-mono-4.8.3.msi; \
+    curl -vLOJ https://dl.winehq.org/wine/wine-mono/4.7.5/wine-mono-4.7.5.msi; \
     cd /opt/wine-stable/share/wine/gecko; \
     curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi; \
     curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi; \
