@@ -7,8 +7,8 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
     curl -vLo /usr/local/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks; \
     chmod +x /usr/local/bin/winetricks; \
     mkdir -p /usr/share/wine/mono /usr/share/wine/gecko; \
-    for branch in stable master; do \
-        curl -vL -o /tmp/addons.c https://raw.githubusercontent.com/wine-mirror/wine/$branch/dlls/appwiz.cpl/addons.c; \
+    for branch in wine-mirror/wine/stable wine-mirror/wine/master PhoenicisOrg/winecx/winecx-18.1.0; do \
+        curl -vL -o /tmp/addons.c https://raw.githubusercontent.com/$branch/dlls/appwiz.cpl/addons.c; \
         MONO_VERSION=$(eval "echo $(awk '$1 == "#define" && $2 == "MONO_VERSION" {print $3}' /tmp/addons.c)"); \
         GECKO_VERSION=$(eval "echo $(awk '$1 == "#define" && $2 == "GECKO_VERSION" {print $3}' /tmp/addons.c)"); \
         rm /tmp/addons.c; \
@@ -18,6 +18,9 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
         curl -vLOJ https://dl.winehq.org/wine/wine-gecko/$GECKO_VERSION/wine_gecko-$GECKO_VERSION-x86_64.msi; \
         curl -vLOJ https://dl.winehq.org/wine/wine-gecko/$GECKO_VERSION/wine_gecko-$GECKO_VERSION-x86.msi; \
     done; \
+    mkdir -p /opt/wine-cx; \
+    cd /opt/wine-cx; \
+    curl -vLOJ https://www.playonlinux.com/wine/binaries/phoenicis/cx-linux-amd64/PlayOnLinux-winecx-18.1.0-cx-linux-amd64.tar.gz | tar -xzf -; \
     cd /tmp; \
     curl -O https://download.microsoft.com/download/D/7/A/D7AD3FF8-2618-4C10-9398-2810DDE730F7/WindowsXPMode_zh-cn.exe; \
     curl -O https://download.microsoft.com/download/B/9/3/B93CD319-CD5A-41C8-9577-39F68D5E8009/WindowsXPMode_zh-tw.exe; \
