@@ -2,16 +2,22 @@ FROM fedora:29
 RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite msxml msxml2 msxml3 msxml6 ole32 oleaut32 olepro32 comctl32 quartz pngfilt setupapi devenum; do echo WINDOWS/system32/$dll.dll; done); \
     useradd -U -m user; \
     curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/29/winehq.repo; \
-    dnf install -y winehq-stable $(dnf repoquery -q --requires winetricks | grep -v ^\( | grep -v ^wine) glx-utils mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW p7zip-plugins libXt gtk2 gdk-pixbuf2 libXScrnSaver atk mesa-libGLU GConf2 ncurses-compat-libs libusb libcanberra; \
+    dnf install -y winehq-stable winehq-devel winehq-staging $(dnf repoquery -q --requires winetricks | grep -v ^\( | grep -v ^wine) glx-utils mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW p7zip-plugins libXt gtk2 gdk-pixbuf2 libXScrnSaver atk mesa-libGLU GConf2 ncurses-compat-libs libusb libcanberra; \
     dnf clean all; \
     curl -vLo /usr/local/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks; \
     chmod +x /usr/local/bin/winetricks; \
-    mkdir -p /opt/wine-stable/share/wine/mono /opt/wine-stable/share/wine/gecko; \
-    cd /opt/wine-stable/share/wine/mono; \
-    curl -vLOJ https://dl.winehq.org/wine/wine-mono/4.7.5/wine-mono-4.7.5.msi; \
-    cd /opt/wine-stable/share/wine/gecko; \
-    curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi; \
-    curl -vLOJ https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi; \
+    mkdir -p /opt/wine/mono /opt/wine/gecko; \
+    for branch in stable master; do \
+        curl -vL -o /tmp/addons.c https://raw.githubusercontent.com/wine-mirror/wine/$branch/dlls/appwiz.cpl/addons.c; \
+        MONO_VERSION=$(eval "echo $(awk '$1 == "#define" && $2 == "MONO_VERSION" {print $3}' /tmp/addons.c)"); \
+        GECKO_VERSION=$(eval "echo $(awk '$1 == "#define" && $2 == "GECKO_VERSION" {print $3}' /tmp/addons.c)"); \
+        rm /tmp/addons.c; \
+        cd /opt/wine/mono; \
+        curl -vLOJ https://dl.winehq.org/wine/wine-mono/$MONO_VERSION/wine-mono-$MONO_VERSION.msi; \
+        cd /opt/wine/gecko; \
+        curl -vLOJ https://dl.winehq.org/wine/wine-gecko/$GECKO_VERSION/wine_gecko-$GECKO_VERSION-x86_64.msi; \
+        curl -vLOJ https://dl.winehq.org/wine/wine-gecko/$GECKO_VERSION/wine_gecko-$GECKO_VERSION-x86.msi; \
+    done; \
     cd /tmp; \
     curl -O https://download.microsoft.com/download/D/7/A/D7AD3FF8-2618-4C10-9398-2810DDE730F7/WindowsXPMode_zh-cn.exe; \
     curl -O https://download.microsoft.com/download/B/9/3/B93CD319-CD5A-41C8-9577-39F68D5E8009/WindowsXPMode_zh-tw.exe; \
