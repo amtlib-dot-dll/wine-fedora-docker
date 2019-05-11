@@ -6,15 +6,15 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
     dnf clean all; \
     curl -vLo /usr/local/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks; \
     chmod +x /usr/local/bin/winetricks; \
-    mkdir -p /opt/wine/mono /opt/wine/gecko; \
+    mkdir -p /usr/share/wine/mono /usr/share/wine/gecko; \
     for branch in stable master; do \
         curl -vL -o /tmp/addons.c https://raw.githubusercontent.com/wine-mirror/wine/$branch/dlls/appwiz.cpl/addons.c; \
         MONO_VERSION=$(eval "echo $(awk '$1 == "#define" && $2 == "MONO_VERSION" {print $3}' /tmp/addons.c)"); \
         GECKO_VERSION=$(eval "echo $(awk '$1 == "#define" && $2 == "GECKO_VERSION" {print $3}' /tmp/addons.c)"); \
         rm /tmp/addons.c; \
-        cd /opt/wine/mono; \
+        cd /usr/share/wine/mono; \
         curl -vLOJ https://dl.winehq.org/wine/wine-mono/$MONO_VERSION/wine-mono-$MONO_VERSION.msi; \
-        cd /opt/wine/gecko; \
+        cd /usr/share/wine/gecko; \
         curl -vLOJ https://dl.winehq.org/wine/wine-gecko/$GECKO_VERSION/wine_gecko-$GECKO_VERSION-x86_64.msi; \
         curl -vLOJ https://dl.winehq.org/wine/wine-gecko/$GECKO_VERSION/wine_gecko-$GECKO_VERSION-x86.msi; \
     done; \
