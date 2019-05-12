@@ -20,7 +20,7 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
     done; \
     mkdir -p /opt/wine-cx; \
     cd /opt/wine-cx; \
-    curl -vLOJ https://www.playonlinux.com/wine/binaries/phoenicis/cx-linux-amd64/PlayOnLinux-winecx-18.1.0-cx-linux-amd64.tar.gz | tar -xzf -; \
+    curl -vL https://www.playonlinux.com/wine/binaries/phoenicis/cx-linux-amd64/PlayOnLinux-winecx-18.1.0-cx-linux-amd64.tar.gz | tar -xzf -; \
     cd /tmp; \
     curl -O https://download.microsoft.com/download/D/7/A/D7AD3FF8-2618-4C10-9398-2810DDE730F7/WindowsXPMode_zh-cn.exe; \
     curl -O https://download.microsoft.com/download/B/9/3/B93CD319-CD5A-41C8-9577-39F68D5E8009/WindowsXPMode_zh-tw.exe; \
