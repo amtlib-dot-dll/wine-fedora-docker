@@ -3,6 +3,7 @@ RUN DLL_FILES=$(for dll in riched20 riched32 msls31 MSCTF MSCTFP wlanapi xmllite
     curl -o /etc/yum.repos.d/winehq.repo https://dl.winehq.org/wine-builds/fedora/29/winehq.repo; \
     dnf install -y wine-stable64 wine-devel64 wine-staging64 $(dnf repoquery -q --requires winetricks | grep -v ^\( | grep -v ^wine) tigervnc-server glx-utils mesa-dri-drivers.x86_64 mesa-dri-drivers.i686 /usr/bin/ntlm_auth glibc-langpack-en langpacks-en glibc-langpack-zh langpacks-zh_CN langpacks-zh_TW p7zip-plugins libXt gtk2 gdk-pixbuf2 libXScrnSaver atk mesa-libGLU GConf2 ncurses-compat-libs libusb libcanberra; \
     dnf clean all; \
+    chmod a+w,+t /home; \
     curl -vLo /usr/local/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks; \
     chmod +x /usr/local/bin/winetricks; \
     mkdir -p /usr/share/wine/mono /usr/share/wine/gecko; \
